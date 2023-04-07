@@ -64,7 +64,7 @@ allprojects {
         implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
 
         implementation "io.sentry:sentry-logback:${sentryVersion}"
-        implementation "io.sentry:sentry-spring-boot-starter:${sentryVersion}"
+        implementation "io.sentry:sentry-spring-boot-starter-jakarta:${sentryVersion}"
 
         implementation "org.mapstruct:mapstruct:${mapstructVersion}"
         kapt "org.mapstruct:mapstruct-processor:${mapstructVersion}"
@@ -81,6 +81,8 @@ allprojects {
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
         testImplementation "com.ninja-squad:springmockk:${springMockkVersion}"
+
+        implementation "com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}"
     }
 
     noArg {

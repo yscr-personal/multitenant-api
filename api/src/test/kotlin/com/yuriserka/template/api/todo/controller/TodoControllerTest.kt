@@ -1,6 +1,5 @@
 package com.yuriserka.template.api.todo.controller
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
 import com.yuriserka.template.api.config.ApiTest
 import com.yuriserka.template.core.todo.domain.TodoDto
@@ -51,8 +50,6 @@ class TodoControllerTest {
             "completed": true
         }
     """.trimIndent()
-
-    private val objectMapper = ObjectMapper()
 
     @Test
     fun `should return all todos`() {

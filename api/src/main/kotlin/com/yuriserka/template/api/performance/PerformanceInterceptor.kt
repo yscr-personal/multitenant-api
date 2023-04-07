@@ -14,7 +14,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy
 class PerformanceInterceptor {
   @Bean
   fun performanceMonitorAdvisor(): Advisor {
-    val pointcut: AspectJExpressionPointcut = AspectJExpressionPointcut()
+    val pointcut = AspectJExpressionPointcut()
     val pointcutExpression: String =
         "within(@org.springframework.web.bind.annotation.RestController *)" +
             " || within(@org.springframework.stereotype.Repository *)"
