@@ -1,0 +1,26 @@
+<configuration>
+    <property name="LOGS" value="./logs"/>
+    <property name="TIMESTAMP" value="%d{HH:mm:ss.SSS}"/>
+    <property name="THREAD_NAME" value="%thread"/>
+    <property name="LEVEL" value="%-5level"/>
+    <property name="LOGGER_NAME" value="%logger{36}"/>
+    <property name="MESSAGE" value="%msg%nopex%n%red(%xException)"/>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%black(${TIMESTAMP}) [%gray(${THREAD_NAME})] %highlight(${LEVEL}) [%yellow(${LOGGER_NAME})] - ${MESSAGE}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="Sentry" class="io.sentry.logback.SentryAppender">
+        <options>
+        </options>
+        <minimumEventLevel>ERROR</minimumEventLevel>
+        <minimumBreadcrumbLevel>INFO</minimumBreadcrumbLevel>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="Console" />
+        <appender-ref ref="Sentry" />
+    </root>
+</configuration>

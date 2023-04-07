@@ -1,0 +1,22 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = "${checkstylePluginVersion}"
+    configFile = file(rootProject.projectDir.absolutePath + '/config/checkstyle/checkstyle.xml')
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}
+
+checkstyleTest {
+    source = 'src/test/java'
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}

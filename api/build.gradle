@@ -1,0 +1,31 @@
+springBoot {
+    buildInfo()
+}
+
+bootJar {
+    enabled = true
+}
+
+jar {
+    enabled = true
+    manifest {
+        attributes(
+                'Main-Class': 'com.yuriserka.template.TemplateApplication'
+        )
+    }
+}
+
+dependencies {
+    implementation project(':core')
+
+    implementation "io.swagger.core.v3:swagger-annotations:${swaggerV3Version}"
+    implementation "io.swagger.core.v3:swagger-models:${swaggerV3Version}"
+
+    implementation "org.springdoc:springdoc-openapi-data-rest:${openapiVersion}"
+    implementation "org.springdoc:springdoc-openapi-ui:${openapiVersion}"
+    implementation "org.springdoc:springdoc-openapi-kotlin:${openapiVersion}"
+}
+
+bootRun {
+    args = ["--spring.profiles.active=dev"]
+}
