@@ -1,0 +1,38 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "${jacocoPluginVersion}"
+}
+
+def excludeFiles = [
+        '**/**Configuration**.class',
+]
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.6
+            }
+        }
+    }
+
+    afterEvaluate {
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: excludeFiles)
+        })
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = false
+        xml.destination = file("${buildDir}/reports/jacoco/jacoco.xml")
+    }
+    afterEvaluate {
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: excludeFiles)
+        })
+    }
+}

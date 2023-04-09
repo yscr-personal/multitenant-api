@@ -4,6 +4,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 test {
     forkEvery = 100
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+
+    finalizedBy tasks.jacocoTestReport
 }
 
 tasks.withType(Test).configureEach {

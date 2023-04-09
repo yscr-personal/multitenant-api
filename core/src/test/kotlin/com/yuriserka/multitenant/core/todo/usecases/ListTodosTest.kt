@@ -4,6 +4,7 @@ import com.yuriserka.multitenant.core.config.CoreTest
 import com.yuriserka.multitenant.core.todo.domain.Todo
 import com.yuriserka.multitenant.core.todo.domain.TodoDto
 import com.yuriserka.multitenant.core.todo.domain.mapper.TodoMapper
+import com.yuriserka.multitenant.core.todo.exceptions.TodoNotFound
 import com.yuriserka.multitenant.core.todo.gateway.http.TodoHttpGateway
 import com.yuriserka.multitenant.core.todo.gateway.jpa.TodoJpaGateway
 import com.yuriserka.multitenant.core.todo.usecases.impl.ListTodosImpl
@@ -13,6 +14,7 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 import java.util.*
+import org.junit.jupiter.api.assertThrows
 
 @CoreTest
 class ListTodosTest {
@@ -63,5 +65,14 @@ class ListTodosTest {
         assert(result.id == id)
         verify(exactly = 1) { todoJpaGateway.getById(id) }
         verify(exactly = 1) { todoMapper.toDto(any()) }
+    }
+
+    @Test
+    fun `should throw Exception if todo not found`() {
+        val id = UUID.randomUUID().toString()
+
+        every { todoJpaGateway.getById(id) } throws TodoNotFound(id)
+
+        assertThrows<TodoNotFound> { listTodos.byId(id) }
     }
 }

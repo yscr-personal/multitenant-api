@@ -22,6 +22,7 @@ allprojects {
     apply plugin: "org.jetbrains.kotlin.plugin.allopen"
     apply plugin: "org.jetbrains.kotlin.plugin.noarg"
 
+    apply from: "${rootProject.rootDir}/config/jacoco.gradle"
     apply from: "${rootProject.rootDir}/config/checkstyle.gradle"
     apply from: "${rootProject.rootDir}/config/pmd.gradle"
     apply from: "${rootProject.rootDir}/config/tests.gradle"
