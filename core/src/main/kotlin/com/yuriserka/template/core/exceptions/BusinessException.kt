@@ -5,9 +5,5 @@ class BusinessException {
         TODO_NOT_FOUND
     }
 
-    open class Error(private val type: ErrorType, override val message: String) : RuntimeException(message) {
-        fun getType(): ErrorType {
-            return type
-        }
-    }
+    open class Error(private val type: ErrorType, override val message: String) : RuntimeException(message)
 }
