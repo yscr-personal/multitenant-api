@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.internal.KaptWithoutKotlincTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id "org.springframework.boot" version "3.0.5"
@@ -11,7 +12,6 @@ plugins {
     id "org.jetbrains.kotlin.plugin.noarg" version "1.8.20"
 }
 
-
 allprojects {
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
@@ -20,20 +20,23 @@ allprojects {
     apply plugin: "org.jetbrains.kotlin.plugin.spring"
     apply plugin: "org.jetbrains.kotlin.plugin.jpa"
     apply plugin: "org.jetbrains.kotlin.plugin.allopen"
+    apply plugin: "org.jetbrains.kotlin.plugin.noarg"
 
     apply from: "${rootProject.rootDir}/config/checkstyle.gradle"
     apply from: "${rootProject.rootDir}/config/pmd.gradle"
     apply from: "${rootProject.rootDir}/config/tests.gradle"
 
-    group = "com.yuriserka.template"
+    group = "com.yuriserka.multitenant"
     version = "0.0.1-SNAPSHOT"
 
     sourceCompatibility = "17"
     targetCompatibility = "17"
 
     kotlin.target.compilations.configureEach {
-        kotlinOptions.jvmTarget = "17"
-        kotlinOptions.freeCompilerArgs += ["-Xjsr305=strict"]
+        kotlinOptions {
+            jvmTarget = "17"
+            freeCompilerArgs += ["-Xjsr305=strict"]
+        }
     }
 
     configurations {
@@ -86,7 +89,7 @@ allprojects {
     }
 
     noArg {
-        annotation("com.yuriserka.template.core.config.annotations.NoArg")
+        annotation("com.yuriserka.multitenant.core.config.annotations.NoArg")
         invokeInitializers = true
     }
 
@@ -109,7 +112,7 @@ tasks.named("test") {
     useJUnitPlatform()
 }
 
-tasks.register('codeChecks', GradleBuild) {
+tasks.register("codeChecks", GradleBuild) {
     tasks = ["checkstyleMain", "pmdMain", "checkstyleTest", "pmdTest"]
 }
 
@@ -120,5 +123,5 @@ dependencies {
 
 tasks.withType(KaptWithoutKotlincTask.class)
         .configureEach {
-            kaptProcessJvmArgs.add('-Xmx512m')
+            kaptProcessJvmArgs.add("-Xmx512m")
         }

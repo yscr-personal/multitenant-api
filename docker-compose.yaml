@@ -3,16 +3,16 @@ version: '3.7'
 services:
   postgres:
     image: postgres
-    container_name: postgres-template-api
+    container_name: postgres-multitenant-api
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: template_api
+      POSTGRES_DB: multitenant
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - postgres-template-api:/var/lib/postgresql/data
+      - postgres-multitenant-api:/var/lib/postgresql/data
 
 volumes:
-  postgres-template-api:
+  postgres-multitenant-api:
   

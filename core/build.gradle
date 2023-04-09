@@ -13,7 +13,7 @@ jar {
 flyway {
     baselineOnMigrate = true
     configFiles = [
-        'src/main/resources/flyway-dev.config'
+            "src/main/resources/flyway-dev.config"
     ]
 }
 
@@ -25,4 +25,9 @@ dependencies {
 
     implementation "io.github.resilience4j:resilience4j-micrometer:${resilience4jVersion}"
     implementation "io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}"
+
+    implementation "org.springframework.boot:spring-boot-starter-cache:${springBootVersion}"
+
+    implementation "com.hazelcast:hazelcast:${hazelCastVersion}"
+    implementation "com.hazelcast:hazelcast-spring:${hazelCastVersion}"
 }
